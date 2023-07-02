@@ -1,7 +1,7 @@
  
- #H1 SDL3 libraries as git submodule:
+ # H1 SDL3 libraries as git submodule:
  
- #H3 HOW TO create:
+ ### H3 HOW TO create:
  
  -add sdl as a submodule:
 	git submodule add https://github.com/libsdl-org/SDL.git ./ThirdParty/SDL/
@@ -44,7 +44,7 @@
 
   ```
 
-   #H3 Or just Fork or clone this repo:
+   ### H3 Or just Fork or clone this repo:
 	-in case a SDL folder still empty after updating submodules through cmd:
 	```
 	git submodule update --init --recursive
