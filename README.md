@@ -3,11 +3,11 @@
  
  ### H3 HOW TO create:
  
- -add sdl as a submodule:
+ -Add sdl as a submodule:
 	git submodule add https://github.com/libsdl-org/SDL.git ./ThirdParty/SDL/
  
  
- -root CMAKElists.txt:
+ -Root CMAKElists.txt:
 	```
 	cmake_minimum_required(VERSION 3.1.0)
 	project(render)
@@ -19,7 +19,7 @@
 	add_subdirectory(src)
 	
 	```
-  -inside src dir:
+  -Inside src dir:
   ```
 	cmake_minimum_required (VERSION 3.21)
 	
@@ -30,7 +30,7 @@
 	target_link_libraries(${PROJECT_NAME} PRIVATE ThirdParty)
 	
   ```
-  -inside ThirdParty dir:
+  -Inside ThirdParty dir:
   ```
 	#(avoid copying .dll)
 	option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
@@ -45,11 +45,11 @@
   ```
 
    ### H3 Or just Fork or clone this repo:
-	-in case a SDL folder still empty after updating submodules through cmd:
+	-In case a SDL folder still empty after updating submodules through cmd:
 	```
 	git submodule update --init --recursive
 	```
-	solution (that works for me!!! ) : 
+	Solution (that works for me!!! ) : 
 	```
 	git rm --cached  SDL
 	```
