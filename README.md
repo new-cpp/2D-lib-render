@@ -1,1 +1,1 @@
-# H1 SDL2 2D lib demo
+# H1 SDL32D lib demo
