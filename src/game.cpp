@@ -3,6 +3,9 @@
 
 #include <string>
 #include <vector>
+#include <random>
+#include <chrono>
+#include <algorithm>
 void Game::init()
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -11,7 +14,7 @@ void Game::init()
 		throw(msg);
 		exit(-1);
 	}
-	window = SDL_CreateWindow("2d lib demo", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE & SDL_WINDOW_BORDERLESS);
+	window = SDL_CreateWindow("2d lib demo", 640, 480, SDL_WINDOW_RESIZABLE & SDL_WINDOW_BORDERLESS);
 
 	if (!window)
 	{
@@ -20,7 +23,7 @@ void Game::init()
 		exit(-1);
 	}
 
-	renderer = SDL_CreateRenderer(window, -1, 0);
+	renderer = SDL_CreateRenderer(window, nullptr, 0);
 
 	if (!renderer)
 	{
@@ -47,10 +50,10 @@ void Game::inputProcess()
 	{
 		switch (e.type)
 		{
-		case SDL_QUIT:
+		case SDL_EVENT_QUIT:
 			is_Running = false;
 			break;
-		case SDL_KEYDOWN:
+		case SDL_EVENT_KEY_DOWN:
 			if (e.key.keysym.sym == SDLK_ESCAPE)
 				is_Running = false;
 			break;
@@ -60,10 +63,19 @@ void Game::inputProcess()
 
 void Game::render()
 {
+	std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+
 	Circle c (SDL_Point{ 320, 240 }, 50, SDL_Color{ 0xff,0x00,0x00,0xff });
 	//c.render(renderer);
-	std::vector<Object*> obj;
-	obj.emplace_back(&c);
+	std::vector<Object*> obj(100);
+	for (auto& ele : obj)
+	{
+		Uint32 raduis{ static_cast<Uint32>(rng()) % (50) }; /* half widow width*/
+
+		SDL_Point center{ static_cast<Uint32>(rng())%640,static_cast<Uint32>(rng())%480 };
+		SDL_Color color{ static_cast<Uint32>(rng()) % 255,static_cast<Uint32>(rng()) % 255,static_cast<Uint32>(rng()) % 255,255 };
+		ele = new Circle(center, raduis, color);
+	}
 	for (auto ele : obj)
 	{
 		ele->render(renderer);

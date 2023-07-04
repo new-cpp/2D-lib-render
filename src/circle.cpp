@@ -10,6 +10,12 @@ void Circle::computeBounds()
 
 bool Circle::render(SDL_Renderer* t_renderer)
 {
+
+	return naive_pixel_circle(t_renderer);
+}
+
+bool Circle::naive_pixel_circle(SDL_Renderer* t_renderer)
+{
 	if (t_renderer == nullptr)  return false;
 
 	SDL_SetRenderDrawColor(t_renderer, m_color.r, m_color.g, m_color.b, m_color.a);
@@ -24,9 +30,15 @@ bool Circle::render(SDL_Renderer* t_renderer)
 			a, b, c;
 			if (Square(m_center.x - x) + Square(m_center.y - y) <= Square(m_raduis))
 			{
-				SDL_RenderDrawPoint(t_renderer, x, y);
+				SDL_RenderPoint(t_renderer, x, y);
 			}
 		}
 	}
+	return true;
+}
+
+bool Circle::buffered_circle(SDL_Renderer* t_renderer)
+{
+
 	return true;
 }

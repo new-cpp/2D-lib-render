@@ -1,0 +1,27 @@
+﻿{
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "D:\\project\\build",
+      "installRoot": "D:\\project\\build",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "SDL2_DISABLE_INSTALL",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "SDL2_DISABLE_SDL2MAIN",
+          "value": "True",
+          "type": "BOOL"
+        }
+      ]
+    }
+  ]
+}

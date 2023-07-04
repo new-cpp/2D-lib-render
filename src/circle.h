@@ -18,8 +18,21 @@ public:
 	SDL_Rect getBounds() override { return m_Bounds; }
 	bool render(SDL_Renderer* t_renderer) override;
 
+
 	SDL_Point getCenter() { return m_center; }
 	size_t getRaduis() { return m_raduis; }
+
+	/*
+	* naive drawing pixels
+	*/
+	bool naive_pixel_circle(SDL_Renderer* t_renderer);
+
+	/*
+	* using uint32 pixel buffer into texture
+	*/
+	bool buffered_circle(SDL_Renderer* t_renderer);
+	
+
 
 private:
 	void computeBounds();
