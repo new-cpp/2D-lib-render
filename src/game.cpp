@@ -70,7 +70,7 @@ void Game::render()
 	std::vector<Object*> obj(100);
 	for (auto& ele : obj)
 	{
-		Uint32 raduis{ static_cast<Uint32>(rng()) % (50) }; /* half widow width*/
+		Uint32 raduis{ static_cast<Uint32>(rng()) % (50) + 1 }; /* half widow width*/
 
 		SDL_Point center{ static_cast<Uint32>(rng())%640,static_cast<Uint32>(rng())%480 };
 		SDL_Color color{ static_cast<Uint32>(rng()) % 255,static_cast<Uint32>(rng()) % 255,static_cast<Uint32>(rng()) % 255,255 };
@@ -80,7 +80,9 @@ void Game::render()
 	{
 		ele->render(renderer);
 	}
+	SDL_Delay(1000u);
 	SDL_RenderPresent(renderer);
+	SDL_RenderClear(renderer);
 }
 
 
