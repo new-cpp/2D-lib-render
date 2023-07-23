@@ -15,7 +15,7 @@ public:
 
 	~Circle()override { };
 
-	SDL_FRect getBounds() override { return m_Bounds; }
+	SDL_FRect getBounds() override { return m_bounds; }
 	bool render(SDL_Renderer* t_renderer) override;
 
 
@@ -38,7 +38,6 @@ private:
 	void computeBounds();
 	void update_texture(SDL_Renderer* t_renderer);
 
-	SDL_FRect m_Bounds{};
 	SDL_Point m_center{};
 	size_t m_raduis{};
 	SDL_Color m_color{};

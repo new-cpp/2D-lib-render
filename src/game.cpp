@@ -1,5 +1,6 @@
 #include "game.h"
 #include "circle.h"
+#include "FilledPolygone.h"
 
 #include <string>
 #include <vector>
@@ -65,21 +66,29 @@ void Game::render()
 {
 	std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 
-	Circle c (SDL_Point{ 320, 240 }, 50, SDL_Color{ 0xff,0x00,0x00,0xff });
-	//c.render(renderer);
-	std::vector<Object*> obj(100);
-	for (auto& ele : obj)
-	{
-		Uint32 raduis{ static_cast<Uint32>(rng()) % (50) + 1 }; /* half widow width*/
+	// circle test
+	//Circle c (SDL_Point{ 320, 240 }, 50, SDL_Color{ 0xff,0x00,0x00,0xff });
+	////c.render(renderer);
+	//std::vector<Object*> obj(100);
+	//for (auto& ele : obj)
+	//{
+	//	Uint32 raduis{ static_cast<Uint32>(rng()) % (50) + 1 }; /* half widow width*/
 
-		SDL_Point center{ static_cast<Uint32>(rng())%640,static_cast<Uint32>(rng())%480 };
-		SDL_Color color{ static_cast<Uint32>(rng()) % 255,static_cast<Uint32>(rng()) % 255,static_cast<Uint32>(rng()) % 255,255 };
-		ele = new Circle(center, raduis, color);
-	}
-	for (auto ele : obj)
+	//	SDL_Point center{ static_cast<Uint32>(rng())%640,static_cast<Uint32>(rng())%480 };
+	//	SDL_Color color{ static_cast<Uint32>(rng()) % 255,static_cast<Uint32>(rng()) % 255,static_cast<Uint32>(rng()) % 255,255 };
+	//	ele = new Circle(center, raduis, color);
+	//}
+
+	//polygone test
+	//std::vector<SDL_Point> testVertices { {100,100}, { 200,100 }, {150 ,200 }};
+	std::vector<SDL_Point> testVertices { {100, 100}, { 200,100 }, { 200 ,200 }, { 150,150 }, { 100,200 }};
+	//std::vector<SDL_Point> testVertices { {100, 100}, { 200,100 }, { 200 ,200 }, { 100,200 }};
+	FilledPolygone poly(renderer, testVertices, SDL_Color{255,255,0,255});
+	poly.render(renderer);
+	/*for (auto ele : obj)
 	{
 		ele->render(renderer);
-	}
+	}*/
 	SDL_Delay(1000u);
 	SDL_RenderPresent(renderer);
 	SDL_RenderClear(renderer);
