@@ -17,6 +17,7 @@ public:
 
 	SDL_FRect getBounds() override { return m_bounds; }
 	bool render(SDL_Renderer* t_renderer) override;
+	virtual void translate(const SDL_Point& t_vector) override;
 
 
 	SDL_Point getCenter() { return m_center; }

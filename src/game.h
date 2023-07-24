@@ -1,7 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 #include "common.h"
+#include "object.h"
 
+#include <vector>
 struct Game
 {
 	Game() = default;
@@ -17,6 +19,11 @@ struct Game
 	{
 		return is_Running;
 	}
+
+	std::vector<Object*> m_objects;
+	std::vector<SDL_Point> m_vec_list;//translation vector of each obj
+
+	int m_xrendersize, m_yrendersize;
 
 	SDL_Window* window{ nullptr };
 	SDL_Renderer* renderer{ nullptr };

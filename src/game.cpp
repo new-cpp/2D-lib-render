@@ -34,14 +34,36 @@ void Game::init()
 		exit(-1);
 	}
 
-	SDL_SetRenderDrawColor(renderer, current_color.r, current_color.g, current_color.b, current_color.a);
-	SDL_RenderClear(renderer);
+	SDL_GetRenderOutputSize(renderer, &m_xrendersize, &m_yrendersize);
+
+	m_objects.emplace_back(new Circle({ 640,360 }, 100, { 255,255,0,255 }));
+	m_objects.emplace_back(new Circle({ 480,500 }, 50, { 0,255,0,255 }));
+	m_objects.emplace_back(new Circle({ 100,100 }, 75, { 0,255,255,255 }));
+
+	m_vec_list.emplace_back(SDL_Point{ 1,1 });
+	m_vec_list.emplace_back(SDL_Point{ -1,1 });
+	m_vec_list.emplace_back(SDL_Point{ 1,1 });
 
 }
 
 void Game::update()
 {
-	SDL_SetRenderDrawColor(renderer, current_color.r, current_color.g, current_color.b, current_color.a);
+	for(size_t i = 0 ; i < m_objects.size();++i)
+	{
+		auto objBounds = m_objects[i]->getBounds();
+		
+		//check if we are the edge of the window
+		if ((objBounds.x < 0) || (objBounds.x + objBounds.w) > m_xrendersize)
+		{
+			m_vec_list[i].x *= -1;
+		}
+		if ((objBounds.y < 0) || (objBounds.y + objBounds.h) > m_xrendersize)
+		{
+			m_vec_list[i].y *= -1;
+		}
+
+		m_objects[i]->translate(m_vec_list[i]);
+	}
 }
 
 void Game::inputProcess()
@@ -64,7 +86,16 @@ void Game::inputProcess()
 
 void Game::render()
 {
-	std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+	//background
+	SDL_SetRenderDrawColor(renderer, current_color.r, current_color.g, current_color.b, current_color.a);
+	SDL_RenderClear(renderer);
+
+
+	for (auto& ele : m_objects)
+		ele->render(renderer);
+
+
+	//std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 
 	// circle test
 	//Circle c (SDL_Point{ 320, 240 }, 50, SDL_Color{ 0xff,0x00,0x00,0xff });
@@ -80,18 +111,17 @@ void Game::render()
 	//}
 
 	//polygone test
-	//std::vector<SDL_Point> testVertices { {100,100}, { 200,100 }, {150 ,200 }};
-	std::vector<SDL_Point> testVertices { {100, 100}, { 200,100 }, { 200 ,200 }, { 150,150 }, { 100,200 }};
-	//std::vector<SDL_Point> testVertices { {100, 100}, { 200,100 }, { 200 ,200 }, { 100,200 }};
-	FilledPolygone poly(renderer, testVertices, SDL_Color{255,255,0,255});
-	poly.render(renderer);
-	/*for (auto ele : obj)
-	{
-		ele->render(renderer);
-	}*/
-	SDL_Delay(1000u);
+	////std::vector<SDL_Point> testVertices { {100,100}, { 200,100 }, {150 ,200 }};
+	//std::vector<SDL_Point> testVertices { {100, 100}, { 200,100 }, { 200 ,200 }, { 150,150 }, { 100,200 }};
+	////std::vector<SDL_Point> testVertices { {100, 100}, { 200,100 }, { 200 ,200 }, { 100,200 }};
+	//FilledPolygone poly(renderer, testVertices, SDL_Color{255,255,0,255});
+	//poly.render(renderer);
+	///*for (auto ele : obj)
+	//{
+	//	ele->render(renderer);
+	//}*/
+	SDL_Delay(5u);
 	SDL_RenderPresent(renderer);
-	SDL_RenderClear(renderer);
 }
 
 

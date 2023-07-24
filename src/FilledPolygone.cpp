@@ -121,3 +121,16 @@ bool FilledPolygone::render(SDL_Renderer* t_renderer)
 	SDL_RenderTexture(t_renderer, m_texture, &src_rect, &m_bounds);
 		return true;
 }
+
+void FilledPolygone::translate(const SDL_Point& t_vector)
+{
+	//apply to all vertexs and m_bound
+	for (auto& ele : m_vertexs)
+	{
+		ele.x += t_vector.x;
+		ele.y += t_vector.y;
+	}
+
+	m_bounds.x += t_vector.x;
+	m_bounds.y += t_vector.y;
+}

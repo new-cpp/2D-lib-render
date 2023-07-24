@@ -12,6 +12,8 @@ public:
 
 	virtual SDL_FRect getBounds() override;
 	virtual bool render(SDL_Renderer* t_renderer) override;
+	virtual void translate(const SDL_Point& t_vector) override;
+
 
 private:
 	void computeBounds();
