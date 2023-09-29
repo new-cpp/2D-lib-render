@@ -4,7 +4,7 @@
 #include "object.h"
 
 #include <vector>
-class FilledPolygone : Object
+class FilledPolygone : public Object
 {
 public:
 	FilledPolygone(SDL_Renderer* t_renderer, const std::vector<SDL_Point>& t_vertexs, const SDL_Color&& t_color);

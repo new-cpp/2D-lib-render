@@ -17,7 +17,7 @@ struct Game
 
 	bool stillRunning()
 	{
-		return is_Running;
+		return m_is_Running;
 	}
 
 	std::vector<Object*> m_objects;
@@ -25,9 +25,9 @@ struct Game
 
 	int m_xrendersize, m_yrendersize;
 
-	SDL_Window* window{ nullptr };
-	SDL_Renderer* renderer{ nullptr };
-	bool is_Running{ true };
-	SDL_Color current_color{ 0x00,0x00,0x00,0xff }; //black
+	SDL_Window* m_window{ nullptr };
+	SDL_Renderer* m_renderer{ nullptr };
+	bool m_is_Running{ true };
+	SDL_Color m_current_color{ 0x00,0x00,0x00,0xff }; //black
 };
 #endif //!GAME_H

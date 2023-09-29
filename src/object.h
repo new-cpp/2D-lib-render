@@ -12,10 +12,14 @@ public:
 	SDL_Color getColor();
 	virtual SDL_FRect getBounds() { return SDL_FRect(); };
 	virtual bool render(SDL_Renderer* t_renderer) { return true; };
+
+	//function to apply translation
 	virtual void translate(const SDL_Point& t_vector) {};
+	virtual void rotate(SDL_Renderer* t_renderer, float angle) {};
+
 
 	void initTexture(SDL_Renderer* t_renderer);
-	Uint32 convertColor(const SDL_Color& t_color);
+	static Uint32 convertColor(const SDL_Color& t_color);
 
 public:
 	SDL_Color m_color{ 0x00,0x00,0x00,0xff };
