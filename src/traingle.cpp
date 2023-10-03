@@ -38,8 +38,8 @@ void Traingle::computeBounds()
 
 	m_bounds.x = *min_maxX.first;
 	m_bounds.y = *min_maxY.first;
-	m_bounds.w = *min_maxX.first - *min_maxX.second;
-	m_bounds.h = *min_maxY.first - *min_maxY.second;
+	m_bounds.w = *min_maxX.second - *min_maxX.first;
+	m_bounds.h = *min_maxY.second - *min_maxY.first;
 }
 
 void Traingle::update(SDL_Renderer* t_renderer)
@@ -88,7 +88,19 @@ bool Traingle::render(SDL_Renderer* t_renderer)
 
 void Traingle::translate(const SDL_Point& t_vect)
 {
+	//apply to all vertexs and m_bound
+	for (auto& ele : m_vx)
+	{
+		ele += t_vect.x;
+	}
 
+	for (auto& ele : m_vy)
+	{
+		ele += t_vect.y;
+	}
+
+	m_bounds.x += t_vect.x;
+	m_bounds.y += t_vect.y;
 }
 
 void Traingle::interpolate( SDL_Point p1,  SDL_Point p2, std::vector<SDL_Point>* t_edges)
@@ -136,9 +148,9 @@ void Traingle::renderTraingle(Uint32* pixelBuffer, std::array<int, 3> vx, std::a
 
 	//interpolate all the point between the vertices
 	std::vector<SDL_Point> edgePoints;
-	interpolate({ normX[0],normY[0] }, { normX[1],normX[1] }, &edgePoints);
-	interpolate({ normX[1],normY[1] }, { normX[2],normX[2] }, &edgePoints);
-	interpolate({ normX[0],normY[0] }, { normX[2],normX[2] }, &edgePoints);
+	interpolate({ normX[0],normY[0] }, { normX[1],normY[1] }, &edgePoints);
+	interpolate({ normX[1],normY[1] }, { normX[2],normY[2] }, &edgePoints);
+	interpolate({ normX[0],normY[0] }, { normX[2],normY[2] }, &edgePoints);
 
 	//sort xpoint and ypoint by magnitude of ypoints
 	std::sort(edgePoints.begin(), edgePoints.end(), pointSortFnc);
@@ -147,7 +159,7 @@ void Traingle::renderTraingle(Uint32* pixelBuffer, std::array<int, 3> vx, std::a
 	,draw a horzintal line for each value y, between the two correspandte x values*/
 
 	Uint32 pixelColor = convertColor(t_color);
-	for (int i = 0; i +1< edgePoints.size(); i += 2)
+	for (int i = 0; i +1< edgePoints.size() - 1; i += 2)
 	{
 		// extract the cooredinate pair
 		int x1 = edgePoints[i].x;

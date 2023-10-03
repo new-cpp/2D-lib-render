@@ -97,7 +97,19 @@ bool Rectangle::render(SDL_Renderer* t_renderer)
 
 void Rectangle::translate(const SDL_Point& t_vect)
 {
+	//apply to all vertexs and m_bound
+	for (auto& ele : m_vx)
+	{
+		ele += t_vect.x;
+	}
 
+	for (auto& ele : m_vy)
+	{
+		ele += t_vect.y;
+	}
+
+	m_bounds.x += t_vect.x;
+	m_bounds.y += t_vect.y;
 }
 
 void Rectangle::rotate(SDL_Renderer* t_renderer,float theta)

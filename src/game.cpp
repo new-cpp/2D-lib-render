@@ -47,15 +47,19 @@ void Game::init()
 	std::vector<SDL_Point> polygone {{ 100, 100}, { 200,100 }, { 200 ,200 }, { 150,150 }, { 100,200 }};
 	m_objects.push_back(new FilledPolygone(m_renderer, polygone, SDL_Color{ 0,240,0,255 }));
 
-	/*m_objects.push_back(new Traingle(m_renderer, { 100,50 }, { 200,100 }, { 150,200 }, SDL_Color{ 45,77,0,255 }));
+	m_objects.push_back(new Traingle(m_renderer, { 100,50 }, { 200,100 }, { 150,200 }, SDL_Color{ 45,77,0,255 }));
 	m_objects.push_back(new Traingle(m_renderer, { 300,50 }, { 200,400 }, { 150,350 }, SDL_Color{ 45,0,0,255 }));
-	m_objects.push_back(new Traingle(m_renderer, { 600,50 }, { 500,100 }, { 150,450 }, SDL_Color{ 0,77,0,255 }));*/
+	m_objects.push_back(new Traingle(m_renderer, { 600,50 }, { 500,100 }, { 150,450 }, SDL_Color{ 0,77,0,255 }));
 
 
 	m_vec_list.emplace_back(SDL_Point{ 1,1 });
 	m_vec_list.emplace_back(SDL_Point{ -1,1 });
 	m_vec_list.emplace_back(SDL_Point{ 1,1 });
 	m_vec_list.emplace_back(SDL_Point{ 1,1 });
+	m_vec_list.emplace_back(SDL_Point{ -1,1 });
+
+	m_vec_list.emplace_back(SDL_Point{ -1,1 });
+	m_vec_list.emplace_back(SDL_Point{ -1,1 });
 	m_vec_list.emplace_back(SDL_Point{ -1,1 });
 
 
